@@ -23,8 +23,17 @@ public class Player {
 	public int getYpos() {
 		return this.y;
 	}
+	public void setXpos(int x) {
+		this.x = x;
+	}
+	public void setYpos(int y) {
+		this.y = y;
+	}
 	public int nWallsLeft() {
-		return wallsLeft;
+		return this.wallsLeft;
+	}
+	public void makeWall() {
+		this.wallsLeft--;
 	}
 	public boolean hasWon() {
 		if (y == goal) {

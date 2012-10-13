@@ -2,25 +2,29 @@ package project;
 
 public class Rules extends Game {
 
-	public Boolean isLegalMove (int Xpos, int Ypos, Directions d, Board b) {
-		int newX = Xpos;
-		int newY = Ypos;
-		if (d==Directions.UP) {
-			newY--;
-		} else if (d==Directions.DOWN) {
-			newY++;
-		} else if (d==Directions.LEFT) {
-			newX--;
-		} else if (d==Directions.RIGHT) {
-			newX++;
-		}
-		if (!isOnBoard(newX, newY)) {
+	public static Boolean isLegalMove (Player p, int Xpos, int Ypos, Board b) {
+		int curX = p.getXpos();
+		int curY = p.getYpos();
+		if (!isOnBoard(Xpos, Ypos)) {
 			return false;
 		}
-		if (b.isWall(Xpos, Ypos, newX, newY)) {
+		boolean adjacent=false;
+		if (Xpos == curX) {
+			if ((Ypos==curY-1)||(Ypos==curY+1)) {
+				adjacent = true;
+			}
+		} else if (Ypos == curY) {
+			if ((Xpos==curX-1)||(Xpos==curX+1)) {
+				adjacent = true;
+			}
+		}
+		if (!adjacent) {
+			return false;
+			// need to change for when other player is there
+		}
+		if (b.isWall(curX, curY, Xpos, Ypos)) {
 			return false;
 		}
-		// if other player in the way
 		return true;
 	}
 	
@@ -56,7 +60,7 @@ public class Rules extends Game {
 		return true;
 	}
 	
-	private Boolean isOnBoard (int Xpos, int Ypos) {
+	private static boolean isOnBoard (int Xpos, int Ypos) {
 		if ((Xpos<0)||(Xpos>8)) {
 			return false;
 		}

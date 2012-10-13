@@ -41,37 +41,41 @@ public class GraphBoard implements Board {
 	public boolean isWall (int x1, int y1, int x2, int y2) {
 		int s1 = y1*Game.N_ROWS + x1;
 		int s2 = y2*Game.N_ROWS + x2;
-		return b.isEdge(s1, s2);
+		return !b.isEdge(s1, s2);
 	}
 
 
 	@Override
-	public void printBoard() {
+	public String toString() {
 		// TODO Auto-generated method stub
+		String s = "";
 		int i, j, k;
 		for (i=0; i<Game.N_ROWS; i++) {
 			for (j=0; j<Game.N_ROWS; j++) {
 				/* check for player's position and indicate if player there
 				if (player there) {
-					System.out.print(something);
+					s += "something";
 				} else {*/
-					System.out.print(".");
+					s += ".";
 				//}
-				if ((j!=Game.N_ROWS-1)&&(this.isWall(i, j, i, j+1))) {
-					System.out.print("|");
-				} else {
-					System.out.print(" ");
+				if (j!=Game.N_ROWS-1) {
+					if (this.isWall(j, i, j+1, i)) {
+						s += "|";
+					} else {
+						s += " ";
+					}
 				}
 			}
-			System.out.println();
-			for (k=0; (k<Game.N_ROWS) && (i!=8); k++) {
-				if (this.isWall(i, j, i+1, j)) {
-					System.out.print("- ");
+			s += "\n";
+			for (k=0; (k<Game.N_ROWS) && (i!=Game.N_ROWS-1); k++) {
+				if (this.isWall(k, i, k, i+1)) {
+					s += "- ";
 				} else {
-					System.out.print("  ");
+					s += "  ";
 				}
 			}
-			System.out.println();
+			s += "\n";
 		}
+		return s;
 	}
 }
