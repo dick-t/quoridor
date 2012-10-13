@@ -8,12 +8,12 @@ public class GraphBoard implements Board {
 	
 	@Override
 	public void MakeWall(int Xpos, int YPos, WallDirections d) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
-	public boolean isUnique(Board newBoard) {
+	public boolean isUnique(Board newBoard) { //compare 
 		// TODO Auto-generated method stub
 		return false;
 	}

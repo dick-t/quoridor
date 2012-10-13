@@ -7,6 +7,7 @@ public interface Board {
 		v
 	};
 	
+	
 	public void MakeWall (int Xpos, int YPos, WallDirections d);
 
 
