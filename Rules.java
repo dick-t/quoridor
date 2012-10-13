@@ -5,23 +5,58 @@ public class Rules extends Game {
 	public static Boolean isLegalMove (Player p, int Xpos, int Ypos, Board b) {
 		int curX = p.getXpos();
 		int curY = p.getYpos();
+		int manD = Math.abs(Xpos - curX) + Math.abs(Ypos - curY); // Manhattan distance
+		if (manD > 2) {
+			return false;
+		}
 		if (!isOnBoard(Xpos, Ypos)) {
 			return false;
 		}
-		boolean adjacent=false;
-		if (Xpos == curX) {
-			if ((Ypos==curY-1)||(Ypos==curY+1)) {
-				adjacent = true;
+		if (manD ==2) {
+			int oppX = p.getOpponent().getXpos();
+			int oppY = p.getOpponent().getYpos();
+			// non-wall affected jumps
+			if ((curX+Xpos == 2*oppX) && (curY+Ypos == 2*oppY)) {
+				return true;
 			}
-		} else if (Ypos == curY) {
-			if ((Xpos==curX-1)||(Xpos==curX+1)) {
-				adjacent = true;
+			// 	wall affected jumps
+			if ((curX==oppX) && (oppY==Ypos)) {
+				if (curY+1 == oppY) { // opponent is under player
+					if (b.isWall(oppX, oppY, oppX, oppY+1)) {
+						return true;
+					} else {
+						return false;
+					}
+				} else if (curY-1 == oppY) { // opponent is above player
+					if (b.isWall(oppX, oppY, oppX, oppY-1)) {
+						return true;
+					} else {
+						return false;
+					}
+				} else {
+					return false;
+				}
+			} else if ((curY==oppY) && (oppX==Xpos)) {
+				if (curX+1 == oppX) { // opponent is right of player
+					if (b.isWall(oppX, oppY, oppX+1, oppY)) {
+						return true;
+					} else {
+						return false;
+					}
+				} else if (curX-1 == oppX) { // opponent is left of player
+					if (b.isWall(oppX, oppY, oppX-1, oppY)) {
+						return true;
+					} else {
+						return false;
+					}
+				} else {
+					return false;
+				}
+			} else { // opponent not in right position for jump
+				return false;
 			}
 		}
-		if (!adjacent) {
-			return false;
-			// need to change for when other player is there
-		}
+		// checks if there is wall, also takes care of non-adjacent squares
 		if (b.isWall(curX, curY, Xpos, Ypos)) {
 			return false;
 		}
