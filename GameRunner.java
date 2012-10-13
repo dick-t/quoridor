@@ -16,7 +16,7 @@ public class GameRunner {
 			int x=-1;
 			int y=-1;
 			while (!madeMove) {
-				gs.print();
+				gs.print(); //print board
 				if (wasInvalid) {
 					System.out.println("\"" + input + "\" was invalid");
 				}
@@ -33,6 +33,7 @@ public class GameRunner {
 					//print help info
 					System.out.println("help info");
 				}
+				// give 'move' as coordinates to spot you want to move to
 				String[] tokens = input.split(" ");
 				if (tokens.length == 2) {
 					try {
@@ -46,8 +47,8 @@ public class GameRunner {
 				}
 				if (!wasInvalid) {
 					madeMove = gs.move(x, y);
+					wasInvalid = !madeMove;
 				}
-				wasInvalid = !madeMove;
 			}
 			//Game ends
 		}

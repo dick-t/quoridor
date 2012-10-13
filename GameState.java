@@ -12,6 +12,8 @@ public class GameState {
 		player1 = new Player(Game.N_ROWS-1); // player at bottom
 		player2 = new Player(0); // player at top
 		curPlayer = player1;
+		player1.setOpponent(player2);
+		player2.setOpponent(player1);
 	}
 	
 	public boolean isGameOver() {

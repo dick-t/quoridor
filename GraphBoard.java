@@ -47,7 +47,7 @@ public class GraphBoard implements Board {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
+		// for printing purposes
 		String s = "";
 		int i, j, k;
 		for (i=0; i<Game.N_ROWS; i++) {
@@ -56,11 +56,11 @@ public class GraphBoard implements Board {
 				if (player there) {
 					s += "something";
 				} else {*/
-					s += ".";
+					s += "."; // these are cells
 				//}
 				if (j!=Game.N_ROWS-1) {
 					if (this.isWall(j, i, j+1, i)) {
-						s += "|";
+						s += "|"; // vertical walls
 					} else {
 						s += " ";
 					}
@@ -69,7 +69,7 @@ public class GraphBoard implements Board {
 			s += "\n";
 			for (k=0; (k<Game.N_ROWS) && (i!=Game.N_ROWS-1); k++) {
 				if (this.isWall(k, i, k, i+1)) {
-					s += "- ";
+					s += "- "; // horizontal walls
 				} else {
 					s += "  ";
 				}
