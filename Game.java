@@ -14,25 +14,5 @@ public class Game {
 		h,
 		v
 	};
-	
-	public boolean isValid (Player p, Directions x) {
-		int pos;
-		
-		if (x==Directions.UP) {
-			pos = p.getYpos()+1;
-		} else if (x==Directions.DOWN) {
-			pos = p.getYpos()-1;
-		} else if (x==Directions.LEFT) {
-			pos = p.getXpos()-1;
-		} else if (x==Directions.RIGHT) {
-			pos = p.getXpos()+1;
-		} else {
-			return false;
-		}
-		if ((pos>=9)||(pos<0)) {
-			return false;
-		}
-		return true;
-	}
 
 }

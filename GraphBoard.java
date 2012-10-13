@@ -43,4 +43,35 @@ public class GraphBoard implements Board {
 		int s2 = y2*Game.N_ROWS + x2;
 		return b.isEdge(s1, s2);
 	}
+
+
+	@Override
+	public void printBoard() {
+		// TODO Auto-generated method stub
+		int i, j, k;
+		for (i=0; i<Game.N_ROWS; i++) {
+			for (j=0; j<Game.N_ROWS; j++) {
+				/* check for player's position and indicate if player there
+				if (player there) {
+					System.out.print(something);
+				} else {*/
+					System.out.print(".");
+				//}
+				if ((j!=Game.N_ROWS-1)&&(this.isWall(i, j, i, j+1))) {
+					System.out.print("|");
+				} else {
+					System.out.print(" ");
+				}
+			}
+			System.out.println();
+			for (k=0; (k<Game.N_ROWS) && (i!=8); k++) {
+				if (this.isWall(i, j, i+1, j)) {
+					System.out.print("- ");
+				} else {
+					System.out.print("  ");
+				}
+			}
+			System.out.println();
+		}
+	}
 }

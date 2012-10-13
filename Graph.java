@@ -24,6 +24,11 @@ public class Graph {
 		array[n2][n1] = false;
 	}
 	
+	public void insertEdge (int n1, int n2) {
+		array[n1][n2] = true;
+		array[n2][n1] = true;
+	}
+	
 	public boolean isEdge (int n1, int n2) {
 		return array[n1][n2];
 	}

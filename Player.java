@@ -5,20 +5,24 @@ public class Player {
 	private int x;
 	private int y;
 	private int goal;
+	private int wallsLeft;
 	protected Player (int n) {
 		goal = Game.N_ROWS -n;
 		x = 4;
 		y = n;
+		wallsLeft = 10;
 	}
 	
-	int getXpos() {
+	public int getXpos() {
 		return this.x;
 	}
-	int getYpos() {
+	public int getYpos() {
 		return this.y;
 	}
-	
-	boolean hasWon() {
+	public int nWallsLeft() {
+		return wallsLeft;
+	}
+	public boolean hasWon() {
 		if (y == goal) {
 			return true;
 		} else {
