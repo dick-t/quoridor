@@ -16,6 +16,7 @@ public class Graph {
 				array[n][n+s] = true;
 				array[n+s][n] = true;
 			}
+			n++;
 		}
 	}
 	
