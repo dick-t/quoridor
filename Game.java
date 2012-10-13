@@ -9,6 +9,11 @@ public class Game {
 		DOWN, 
 		LEFT
 	};
+
+	public enum WallDirections {
+		h,
+		v
+	};
 	
 	public boolean isValid (Player p, Directions x) {
 		int pos;
