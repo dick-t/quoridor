@@ -2,7 +2,7 @@ package project;
 
 public class Rules extends Game {
 
-	public Boolean isLegalMove (int Xpos, int Ypos, Directions d) {
+	public boolean isLegalMove (int Xpos, int Ypos, Directions d) {
 		if (!(isOnBoard(Xpos, Ypos, d))) {
 			return false;
 		}
@@ -10,7 +10,7 @@ public class Rules extends Game {
 		// not finished
 	}
 	
-	public Boolean isLegalWall (int Xpos, int Ypos, WallDirections d) {
+	public boolean isLegalWall (int Xpos, int Ypos, WallDirections d) {
 		if (!(p.nWallsLeft()>0)) {
 			return false;
 		}
@@ -23,7 +23,7 @@ public class Rules extends Game {
 		return true;
 	}
 	
-	private Boolean isOnBoard (int Xpos, int Ypos, Directions d) {
+	private boolean isOnBoard (int Xpos, int Ypos, Directions d) {
 		int pos=-1;
 		if (d == Directions.UP) {
 			pos = Ypos+1;
