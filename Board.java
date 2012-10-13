@@ -9,4 +9,6 @@ public interface Board {
 
 
 	public boolean isUnique (Board newBoard);
+	
+	public boolean isEdge;
 }
