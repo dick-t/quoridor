@@ -10,5 +10,5 @@ public interface Board {
 
 	public boolean isUnique (Board newBoard);
 	
-	public boolean isEdge (int x1, int y1, int x2, int y2);
+	public boolean isWall (int x1, int y1, int x2, int y2);
 }

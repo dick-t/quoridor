@@ -38,7 +38,7 @@ public class GraphBoard implements Board {
 		b.removeEdge(edge2[1], edge2[2]);
 	}
 
-	public boolean isEdge (int x1, int y1, int x2, int y2) {
+	public boolean isWall (int x1, int y1, int x2, int y2) {
 		int s1 = y1*Game.N_ROWS + x1;
 		int s2 = y2*Game.N_ROWS + x2;
 		return b.isEdge(s1, s2);
