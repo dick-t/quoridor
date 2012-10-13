@@ -2,6 +2,10 @@ package project;
 
 public class GraphBoard implements Board {
 
+	//graph-based implementation of a board
+	
+	
+	
 	@Override
 	public void MakeWall(int Xpos, int YPos, WallDirections d) {
 		// TODO Auto-generated method stub
@@ -9,7 +13,7 @@ public class GraphBoard implements Board {
 	}
 
 	@Override
-	public boolean isUnique(Board2 newBoard) {
+	public boolean isUnique(Board newBoard) {
 		// TODO Auto-generated method stub
 		return false;
 	}

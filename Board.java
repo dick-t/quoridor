@@ -10,5 +10,5 @@ public interface Board {
 	public void MakeWall (int Xpos, int YPos, WallDirections d);
 
 
-	public boolean isUnique (Board2 newBoard);
+	public boolean isUnique (Board newBoard);
 }
