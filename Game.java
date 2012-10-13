@@ -10,7 +10,7 @@ public class Game {
 		LEFT
 	};
 	
-	public boolean isValid (Player p, int x) {
+	public boolean isValid (Player p, Directions x) {
 		int pos;
 		if (x==Directions.UP) {
 			pos = p.getYpos()+1;
