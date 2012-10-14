@@ -17,6 +17,9 @@ public class Player {
 	public void setOpponent(Player p) {
 		this.opponent = p;
 	}
+	public Player getOpponent () {
+		return opponent;
+	}
 	public int getXpos() {
 		return this.x;
 	}
