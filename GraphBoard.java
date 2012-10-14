@@ -25,17 +25,17 @@ public class GraphBoard implements Board {
 		int NWSquare = Ypos*(Game.N_ROWS) + Xpos;
 		
 		if (d == WallDirections.h) {
-			edge1[2] = NWSquare + Game.N_ROWS; //edges being broken are vertical
-			edge2[1] = NWSquare + 1;
-			edge2[2] = NWSquare + 1 + Game.N_ROWS;
+			edge1[1] = NWSquare + Game.N_ROWS; //edges being broken are vertical
+			edge2[0] = NWSquare + 1;
+			edge2[1] = NWSquare + 1 + Game.N_ROWS;
 		} else if (d == WallDirections.v) {
-			edge2[1] = NWSquare + Game.N_ROWS; //edges being broken are horizontal
-			edge1[2] = NWSquare + 1;
-			edge2[2] = NWSquare + 1 + Game.N_ROWS;
+			edge2[0] = NWSquare + Game.N_ROWS; //edges being broken are horizontal
+			edge1[1] = NWSquare + 1;
+			edge2[1] = NWSquare + 1 + Game.N_ROWS;
 		}
 		
-		b.removeEdge(edge1[1], edge1[2]);//remove both edges from graph
-		b.removeEdge(edge2[1], edge2[2]);
+		b.removeEdge(edge1[0], edge1[1]);//remove both edges from graph
+		b.removeEdge(edge2[0], edge2[1]);
 	}
 
 	public boolean isWall (int x1, int y1, int x2, int y2) {
