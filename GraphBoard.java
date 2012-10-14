@@ -23,7 +23,7 @@ public class GraphBoard implements Board {
 		// TODO Auto-generated method stub
 		int edge1[] = new int[2], edge2[] = new int[2];
 		int NWSquare = Ypos*(Game.N_ROWS) + Xpos;
-		
+		edge1[0] = NWSquare;
 		if (d == WallDirections.h) {
 			edge1[1] = NWSquare + Game.N_ROWS; //edges being broken are vertical
 			edge2[0] = NWSquare + 1;
