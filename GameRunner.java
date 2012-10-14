@@ -32,8 +32,7 @@ public class GameRunner {
 				if (input.equals("q")) {
 					System.exit(0);
 				} else if (input.equals("h")) {
-					//print help info
-					System.out.println("help info");
+					printHelp();
 				}
 				// give 'move' as coordinates to spot you want to move to
 				String[] tokens = input.split(" ");
@@ -69,6 +68,14 @@ public class GameRunner {
 			}
 			//Game ends
 		}
+	}
+	
+	public static void printHelp () {
+		System.out.println("To make a move: x y m");
+		System.out.println("Give coordinates of the space you wish to move to, followed by an m.");
+		System.out.println("To place a wall: x y w[h|v]");
+		System.out.print("Give the coordinates of the top left space involved in your wall, ");
+		System.out.println("followed by wh for a horizonal wall or wv for a vertical wall.");
 	}
 
 }
