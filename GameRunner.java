@@ -56,7 +56,7 @@ public class GameRunner {
 							wasInvalid = !madeMove;
 						} else if (tokens[2].charAt(1)=='v') {
 							//vertical wall
-							madeMove = gs.placeWall(x, y, WallDirections.h);
+							madeMove = gs.placeWall(x, y, WallDirections.v);
 							wasInvalid = !madeMove;
 						}
 					} else {
