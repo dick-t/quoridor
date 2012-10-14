@@ -43,7 +43,7 @@ public class GameState {
 	}
 	
 	public void print () {
-		System.out.println(board);
+		board.printBoard(curPlayer.getXpos(), curPlayer.getYpos(), curPlayer.opponent.getXpos(), curPlayer.opponent.getYpos());
 	}
 
 }

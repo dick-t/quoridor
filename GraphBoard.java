@@ -45,37 +45,36 @@ public class GraphBoard implements Board {
 	}
 
 
-	@Override
-	public String toString() {
+	public void printBoard (int x1, int y1, int x2, int y2) {
 		// for printing purposes
-		String s = "";
 		int i, j, k;
 		for (i=0; i<Game.N_ROWS; i++) {
 			for (j=0; j<Game.N_ROWS; j++) {
-				/* check for player's position and indicate if player there
-				if (player there) {
-					s += "something";
-				} else {*/
-					s += "."; // these are cells
-				//}
+				//check for player's position and indicate if player there
+				if ((j==x1) &&(i==y1)) {
+					System.out.print("O"); // current player
+				} else if ((j==x2)&&(i==y2)) {
+					System.out.print("X"); // opponent 
+				} else {
+					System.out.print("."); // these are cells
+				}
 				if (j!=Game.N_ROWS-1) {
 					if (this.isWall(j, i, j+1, i)) {
-						s += "|"; // vertical walls
+						System.out.print("|"); // vertical walls
 					} else {
-						s += " ";
+						System.out.print(" ");
 					}
 				}
 			}
-			s += "\n";
+			System.out.println();
 			for (k=0; (k<Game.N_ROWS) && (i!=Game.N_ROWS-1); k++) {
 				if (this.isWall(k, i, k, i+1)) {
-					s += "- "; // horizontal walls
+					System.out.print("- "); // horizontal walls
 				} else {
-					s += "  ";
+					System.out.print("  ");
 				}
 			}
-			s += "\n";
+			System.out.println();
 		}
-		return s;
 	}
 }

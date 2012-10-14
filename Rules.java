@@ -12,9 +12,12 @@ public class Rules extends Game {
 		if (!isOnBoard(Xpos, Ypos)) {
 			return false;
 		}
+		int oppX = p.getOpponent().getXpos();
+		int oppY = p.getOpponent().getYpos();
+		if ((oppX==Xpos)&&(oppY==Ypos)) { // opponent is in square you want to move to
+			return false;
+		}
 		if (manD ==2) {
-			int oppX = p.getOpponent().getXpos();
-			int oppY = p.getOpponent().getYpos();
 			// non-wall affected jumps
 			if ((curX+Xpos == 2*oppX) && (curY+Ypos == 2*oppY)) {
 				return true;
