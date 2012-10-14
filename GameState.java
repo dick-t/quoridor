@@ -36,10 +36,15 @@ public class GameState {
 		}
 	}
 	
-	public void placeWall (int x, int y, WallDirections d) {
-		board.MakeWall(x, y, d);
-		curPlayer.makeWall();
-		curPlayer = curPlayer.opponent;
+	public boolean placeWall (int x, int y, WallDirections d) {
+		if (curPlayer.nWallsLeft()>0 && Rules.isLegalWall(x, y, d, board)) {
+			board.MakeWall(x, y, d);
+			curPlayer.makeWall();
+			curPlayer = curPlayer.opponent;
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public void print () {

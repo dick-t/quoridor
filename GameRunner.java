@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import project.Game.WallDirections;
+
 public class GameRunner {
 	
 	public static void runGame () {
@@ -35,19 +37,34 @@ public class GameRunner {
 				}
 				// give 'move' as coordinates to spot you want to move to
 				String[] tokens = input.split(" ");
-				if (tokens.length == 2) {
+				if (tokens.length == 3) {
 					try {
 						x = Integer.parseInt(tokens[0]);
 						y = Integer.parseInt(tokens[1]);
 					} catch (Exception e) {
 						wasInvalid = true;
 					}
+					System.out.println(tokens[2]);
+					if (tokens[2].charAt(0)=='m') { // move
+						if (!wasInvalid) {
+							madeMove = gs.move(x, y);
+							wasInvalid = !madeMove;
+						}		
+					} else if (tokens[2].charAt(0)=='w') { // wall
+						if (tokens[2].charAt(1)=='h') {
+							//horizontal wall
+							madeMove = gs.placeWall(x, y, WallDirections.h);
+							wasInvalid = !madeMove;
+						} else if (tokens[2].charAt(1)=='v') {
+							//vertical wall
+							madeMove = gs.placeWall(x, y, WallDirections.h);
+							wasInvalid = !madeMove;
+						}
+					} else {
+						wasInvalid = true;
+					}
 				} else {
 					wasInvalid = true;
-				}
-				if (!wasInvalid) {
-					madeMove = gs.move(x, y);
-					wasInvalid = !madeMove;
 				}
 			}
 			//Game ends

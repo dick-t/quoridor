@@ -66,7 +66,7 @@ public class Rules extends Game {
 		return true;
 	}
 	
-	public Boolean isLegalWall (int Xpos, int Ypos, WallDirections d, Board b) {
+	public static Boolean isLegalWall (int Xpos, int Ypos, WallDirections d, Board b) {
 		// check wall is on board
 		if ((Xpos>8)||(Ypos>8)) {
 			return false;
