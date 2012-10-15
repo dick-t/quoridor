@@ -67,6 +67,7 @@ public class Graph {
 						q.add(c);
 					}
 				}
+				c++;
 			}
 		}
 		return false;
