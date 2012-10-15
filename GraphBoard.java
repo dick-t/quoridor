@@ -77,4 +77,39 @@ public class GraphBoard implements Board {
 			System.out.println();
 		}
 	}
+
+
+	@Override
+	public boolean isPath(int x1, int y1, int x2, int y2, int wallX, int wallY,
+			WallDirections d) {
+		//first make the wall (revert this later after path check)
+		int edge1[] = new int[2], edge2[] = new int[2];
+		int NWSquare = wallY*(Game.N_ROWS) + wallX;
+		edge1[0] = NWSquare;
+		if (d == WallDirections.h) {
+			edge1[1] = NWSquare + Game.N_ROWS; //edges being broken are vertical
+			edge2[0] = NWSquare + 1;
+			edge2[1] = NWSquare + 1 + Game.N_ROWS;
+		} else if (d == WallDirections.v) {
+			edge2[0] = NWSquare + Game.N_ROWS; //edges being broken are horizontal
+			edge1[1] = NWSquare + 1;
+			edge2[1] = NWSquare + 1 + Game.N_ROWS;
+		}
+		
+		b.removeEdge(edge1[0], edge1[1]);//remove both edges from graph
+		b.removeEdge(edge2[0], edge2[1]);
+		
+		//now search for a path on the new graph
+		
+		if (!b.search(y1*Game.N_ROWS+x1, y2*Game.N_ROWS+x2)) {
+			b.insertEdge(edge1[0], edge1[1]);//put edges back
+			b.insertEdge(edge2[0], edge2[1]);
+			return false;
+		}
+		b.insertEdge(edge1[0], edge1[1]);//put edges back
+		b.insertEdge(edge2[0], edge2[1]);
+		
+		
+		return true;
+	}
 }

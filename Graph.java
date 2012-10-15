@@ -1,5 +1,7 @@
 package project;
 
+import java.util.*;
+
 public class Graph {
 	private boolean array[][];
 	private int size;
@@ -33,4 +35,41 @@ public class Graph {
 	public boolean isEdge (int n1, int n2) {
 		return array[n1][n2];
 	}
+	
+	public boolean search(int n1, int n2) {
+		Queue<Integer> q = new LinkedList<Integer>();
+		int t;
+		int c;
+		int count = 0;
+		int visited[] = new int[size];
+		boolean isV;
+		
+		q.add(n1);
+		visited[count] = n1;
+		count++;
+		while (q.size() > 0) { //BFS
+			t = q.remove();
+			if (t==n2) {
+				return true;
+			}
+			c = 0;
+			while (c < size) {
+				if (array[t][c]) {
+					isV = false;
+					for (int v : visited) {
+						if (v == c) {
+							isV = true;
+						}
+					}
+					if (!isV) {
+						visited[count] = c;
+						count++;
+						q.add(c);
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
 }

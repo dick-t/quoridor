@@ -37,7 +37,7 @@ public class GameState {
 	}
 	
 	public boolean placeWall (int x, int y, WallDirections d) {
-		if (curPlayer.nWallsLeft()>0 && Rules.isLegalWall(x, y, d, board)) {
+		if (curPlayer.nWallsLeft()>0 && Rules.isLegalWall(x, y, d, board, player1.getXpos(), player1.getYpos(), player2.getXpos(), player2.getYpos())) {
 			board.MakeWall(x, y, d);
 			curPlayer.makeWall();
 			curPlayer = curPlayer.opponent;

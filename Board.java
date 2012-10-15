@@ -15,4 +15,6 @@ public interface Board {
 	public String toString();
 	
 	public void printBoard(int x1, int y1, int x2, int y2);
+	
+	public boolean isPath(int x1, int y1, int x2, int y2, int wallX, int wallY, WallDirections d);
 }

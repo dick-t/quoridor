@@ -66,7 +66,7 @@ public class Rules extends Game {
 		return true;
 	}
 	
-	public static Boolean isLegalWall (int Xpos, int Ypos, WallDirections d, Board b) {
+	public static Boolean isLegalWall (int Xpos, int Ypos, WallDirections d, Board b, int x1, int y1, int x2, int y2) {
 		// check wall is on board
 		if ((Xpos>8)||(Ypos>8)) {
 			return false;
@@ -92,9 +92,9 @@ public class Rules extends Game {
 				return false;
 			}
 		}
-		/*if (player is blocked) {
+		if (!b.isPath(x1, y1, x2, y2, Xpos, Ypos, d)) {
 			return false;
-		} */
+		}
 		return true;
 	}
 	
