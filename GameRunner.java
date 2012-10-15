@@ -17,13 +17,12 @@ public class GameRunner {
 		while (!gs.isGameOver()) {
 			madeMove = false;
 			wasInvalid = false;
-			boolean isAI = false;
 			input = "";
 			while (!madeMove) {
 				gs.print(); //print board
-				if (!isAI) {
+				if (!gs.isAITurn()) //{
 					humanTurn(gs);
-				} /* else {
+				/*}  else {
 				    AITurn(gs);
 				}*/
 			}

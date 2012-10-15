@@ -7,19 +7,29 @@ public class Player {
 	private int goal;
 	private int wallsLeft;
 	public Player opponent;
-	protected Player (int n) {
+	private boolean isAI;
+	protected Player (int n, boolean isAI) {
 		goal = Game.N_ROWS -n-1;
 		x = 4;
 		y = n;
 		wallsLeft = 10;
+		if (isAI) {
+			this.isAI = true;
+		}
 	}
 	
+	public void makeAI() {
+		this.isAI = true;
+	}
+	public boolean isAI() {
+		return isAI;
+	}
 	public void setOpponent(Player p) {
 		this.opponent = p;
 	}
-	public Player getOpponent () {
+	/*public Player getOpponent () {
 		return opponent;
-	}
+	}*/
 	public int getXpos() {
 		return this.x;
 	}
