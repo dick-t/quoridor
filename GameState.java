@@ -9,11 +9,15 @@ public class GameState {
 	
 	public GameState () {
 		board = new GraphBoard();
-		player1 = new Player(Game.N_ROWS-1); // player at bottom
-		player2 = new Player(0); // player at top
+		player1 = createPlayer(Game.N_ROWS-1); 	// player at bottom
+		player2 = createPlayer(0); 				// player at top
 		curPlayer = player1;
 		player1.setOpponent(player2);
 		player2.setOpponent(player1);
+	}
+	
+	public boolean isAITurn () {
+		return curPlayer.isAI();
 	}
 	
 	public boolean isGameOver() {
@@ -49,6 +53,16 @@ public class GameState {
 	
 	public void print () {
 		board.printBoard(curPlayer.getXpos(), curPlayer.getYpos(), curPlayer.opponent.getXpos(), curPlayer.opponent.getYpos());
+	}
+	
+	private Player createPlayer (int n) {
+		Player p;
+		System.out.println("Is player human? [y|n]");
+		//if (human) 
+			p = new Player (n, false);
+		// else
+			// p = new Player (n, true);
+		return p;
 	}
 
 }
