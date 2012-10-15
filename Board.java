@@ -5,8 +5,8 @@ import project.Game.WallDirections;
 public interface Board {
 	//abstract board for quoridor game
 	
-	public void MakeWall (int Xpos, int YPos, WallDirections d);
-
+	public void MakeWall (int Xpos, int Ypos, WallDirections d);
+	public void RemoveWall (int Xpos, int Ypos, WallDirections d);
 
 	public boolean isUnique (Board newBoard);
 	
@@ -16,5 +16,5 @@ public interface Board {
 	
 	public void printBoard(int x1, int y1, int x2, int y2);
 	
-	public boolean isPath(int x1, int y1, int x2, int y2, int wallX, int wallY, WallDirections d);
+	public boolean isPath(int x, int y, int goalY);
 }

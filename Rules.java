@@ -66,8 +66,11 @@ public class Rules extends Game {
 		return true;
 	}
 	
-	public static Boolean isLegalWall (int Xpos, int Ypos, WallDirections d, Board b, int x1, int y1, int x2, int y2) {
+	public static Boolean isLegalWall (int Xpos, int Ypos, WallDirections d, Board b, Player p) {
 		// check wall is on board
+		if (p.nWallsLeft()<=0) {
+			return false;
+		}
 		if ((Xpos>8)||(Ypos>8)) {
 			return false;
 		}
@@ -92,7 +95,7 @@ public class Rules extends Game {
 				return false;
 			}
 		}
-		if (!b.isPath(x1, y1, x2, y2, Xpos, Ypos, d)) {
+		if (!isPath(Xpos, Ypos, d, b, p)) {
 			return false;
 		}
 		return true;
@@ -106,6 +109,15 @@ public class Rules extends Game {
 			return false;
 		}
 		return true;
+	}
+	
+	private static Boolean isPath (int Xpos, int Ypos, WallDirections d, Board b, Player p) {
+		boolean valid;
+		Player q = p.opponent;
+		b.MakeWall(Xpos, Ypos, d);
+		valid = b.isPath(p.getXpos(), p.getYpos(), p.getGoalY())&&b.isPath(q.getXpos(), q.getYpos(), q.getGoalY());
+		b.RemoveWall(Xpos, Ypos, d);
+		return valid;
 	}
 	
 }

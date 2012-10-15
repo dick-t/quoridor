@@ -36,7 +36,7 @@ public class Graph {
 		return array[n1][n2];
 	}
 	
-	public boolean search(int n1, int n2) {
+	public boolean search(int n, int goalY) {
 		Queue<Integer> q = new LinkedList<Integer>();
 		int t;
 		int c;
@@ -44,13 +44,18 @@ public class Graph {
 		int visited[] = new int[size];
 		boolean isV;
 		
-		q.add(n1);
-		visited[count] = n1;
+		q.add(n);
+		visited[count] = n;
 		count++;
-		while (q.size() > 0) { //BFS
+		while (q.size() > 0) { //modified BFS
 			t = q.remove();
-			if (t==n2) {
+			if ((t>=goalY*Math.sqrt(size))&&(t<(goalY+1)*Math.sqrt(size))) {
 				return true;
+			}
+			else {
+				System.out.println(t);
+				System.out.println(Math.sqrt(size));
+				System.out.println(goalY*(Math.sqrt(size)));
 			}
 			c = 0;
 			while (c < size) {

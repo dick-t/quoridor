@@ -44,6 +44,7 @@ public class GameRunner {
 		if (wasInvalid) {
 			System.out.println("\"" + input + "\" was invalid");
 		}
+		wasInvalid=false;
 		System.out.println("Enter your move ('h' for help, 'q' to quit):");
 		try {
 			input = is.readLine();
@@ -56,7 +57,6 @@ public class GameRunner {
 		} else if (input.equals("h")) {
 			printHelp();
 		}
-		// give 'move' as coordinates to spot you want to move to
 		String[] tokens = input.split(" ");
 		if (tokens.length == 3) {
 			try {
@@ -65,7 +65,6 @@ public class GameRunner {
 			} catch (Exception e) {
 				wasInvalid = true;
 			}
-			System.out.println(tokens[2]);
 			if (tokens[2].charAt(0)=='m') { // move
 				if (!wasInvalid) {
 					madeMove = gs.move(x, y);
