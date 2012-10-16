@@ -61,6 +61,10 @@ public class GameRunner {
 			System.exit(0);
 		} else if (input.equals("h")) {
 			printHelp();
+		} else if (input.equals("u")) {
+			gs.undo();
+		} else if (input.equals("r")) {
+			gs.redo();
 		} else {
 			String[] tokens = input.split(" ");
 			if (tokens.length == 3) {
