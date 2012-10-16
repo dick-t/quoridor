@@ -19,15 +19,15 @@ public class GameRunner {
 			wasInvalid = false;
 			input = "";
 			while (!madeMove) {
-				gs.print(); //print board
-				if (!gs.isAITurn()) //{
+				gs.print(); //print board and player locations
+				if (!gs.isAITurn()) {
 					humanTurn(gs);
-				/*}  else {
+				}  else {
 				    AITurn(gs);
-				}*/
+				}
 			}
-			//Game ends
 		}
+		System.out.println("Game Over!");
 	}
 	
 	public static void printHelp () {
@@ -36,6 +36,11 @@ public class GameRunner {
 		System.out.println("To place a wall: x y w[h|v]");
 		System.out.print("Give the coordinates of the top left space involved in your wall, ");
 		System.out.println("followed by wh for a horizonal wall or wv for a vertical wall.");
+	}
+	
+	public static void AITurn (GameState gs) {
+		System.out.println("AI does nothing");
+		gs.switchPlayers();
 	}
 	
 	public static void humanTurn (GameState gs) {
@@ -56,35 +61,36 @@ public class GameRunner {
 			System.exit(0);
 		} else if (input.equals("h")) {
 			printHelp();
-		}
-		String[] tokens = input.split(" ");
-		if (tokens.length == 3) {
-			try {
-				x = Integer.parseInt(tokens[0]);
-				y = Integer.parseInt(tokens[1]);
-			} catch (Exception e) {
-				wasInvalid = true;
-			}
-			if (tokens[2].charAt(0)=='m') { // move
-				if (!wasInvalid) {
-					madeMove = gs.move(x, y);
-					wasInvalid = !madeMove;
-				}		
-			} else if (tokens[2].charAt(0)=='w') { // wall
-				if (tokens[2].charAt(1)=='h') {
-					//horizontal wall
-					madeMove = gs.placeWall(x, y, WallDirections.h);
-					wasInvalid = !madeMove;
-				} else if (tokens[2].charAt(1)=='v') {
-					//vertical wall
-					madeMove = gs.placeWall(x, y, WallDirections.v);
-					wasInvalid = !madeMove;
+		} else {
+			String[] tokens = input.split(" ");
+			if (tokens.length == 3) {
+				try {
+					x = Integer.parseInt(tokens[0]);
+					y = Integer.parseInt(tokens[1]);
+				} catch (Exception e) {
+					wasInvalid = true;
+				}
+				if (tokens[2].charAt(0)=='m') { // move
+					if (!wasInvalid) {
+						madeMove = gs.move(x, y);
+						wasInvalid = !madeMove;
+					}		
+				} else if (tokens[2].charAt(0)=='w') { // wall
+					if (tokens[2].charAt(1)=='h') {
+					//	horizontal wall
+						madeMove = gs.placeWall(x, y, WallDirections.h);
+						wasInvalid = !madeMove;
+					} else if (tokens[2].charAt(1)=='v') {
+					//	vertical wall
+						madeMove = gs.placeWall(x, y, WallDirections.v);
+						wasInvalid = !madeMove;
+					}
+				} else {
+					wasInvalid = true;
 				}
 			} else {
 				wasInvalid = true;
 			}
-		} else {
-			wasInvalid = true;
 		}
 	}
 

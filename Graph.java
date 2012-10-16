@@ -33,10 +33,14 @@ public class Graph {
 	}
 	
 	public boolean isEdge (int n1, int n2) {
-		return array[n1][n2];
+		if ((n1>=size)||(n2>=size)||(n1<0)||(n2<0)) {
+			return false;
+		} else {
+			return array[n1][n2];
+		}
 	}
 	
-	public boolean search(int n, int goalY) {
+	public boolean searchGoal(int n, int goalY) {
 		Queue<Integer> q = new LinkedList<Integer>();
 		int t;
 		int c;
@@ -51,11 +55,6 @@ public class Graph {
 			t = q.remove();
 			if ((t>=goalY*Math.sqrt(size))&&(t<(goalY+1)*Math.sqrt(size))) {
 				return true;
-			}
-			else {
-				System.out.println(t);
-				System.out.println(Math.sqrt(size));
-				System.out.println(goalY*(Math.sqrt(size)));
 			}
 			c = 0;
 			while (c < size) {

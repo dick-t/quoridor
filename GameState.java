@@ -1,5 +1,9 @@
 package project;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import project.Game.WallDirections;
 
 public class GameState {
@@ -52,17 +56,40 @@ public class GameState {
 	}
 	
 	public void print () {
-		board.printBoard(curPlayer.getXpos(), curPlayer.getYpos(), curPlayer.opponent.getXpos(), curPlayer.opponent.getYpos());
+		board.printBoard(player1.getXpos(), player1.getYpos(), player2.getXpos(), player2.getYpos());
+		System.out.print("Player 1: (");
+		System.out.print(player1.getXpos()+", "+player1.getYpos());
+		System.out.println(")  Walls Left: "+ player1.nWallsLeft());
+		System.out.print("Player 2: (");
+		System.out.print(player2.getXpos()+", "+player2.getYpos());
+		System.out.println(")  Walls Left: "+ player2.nWallsLeft());
 	}
 	
 	private Player createPlayer (int n) {
-		Player p;
-		System.out.println("Is player human? [y|n]");
-		//if (human) 
-			p = new Player (n, false);
-		// else
-			// p = new Player (n, true);
+		Player p = new Player(n, false);
+		String input = "";
+		boolean pMade=false;
+		while (!pMade) {
+			System.out.println("Is player human? [y|n]");
+			BufferedReader is = new BufferedReader (new InputStreamReader(System.in));
+			try {
+				input = is.readLine();
+			} catch (IOException e) {
+				System.out.println("Could not read input");
+				System.exit(1);
+			}
+			if (input.equals("y")) { 
+				pMade = true;
+			} else if (input.equals("n")) {
+				p.makeAI();
+				pMade = true;
+			}
+		}
 		return p;
+	}
+	
+	public void switchPlayers () {
+		curPlayer = curPlayer.opponent;
 	}
 
 }

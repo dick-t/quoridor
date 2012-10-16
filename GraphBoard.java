@@ -48,13 +48,20 @@ public class GraphBoard implements Board {
 	public void printBoard (int x1, int y1, int x2, int y2) {
 		// for printing purposes
 		int i, j, k;
+		System.out.print("  ");
 		for (i=0; i<Game.N_ROWS; i++) {
+			System.out.print(i+" ");
+		}
+		System.out.println();
+		System.out.println("  ------------------");
+		for (i=0; i<Game.N_ROWS; i++) {
+			System.out.print(i+"|");
 			for (j=0; j<Game.N_ROWS; j++) {
 				//check for player's position and indicate if player there
 				if ((j==x1) &&(i==y1)) {
-					System.out.print("O"); // current player
+					System.out.print("1"); // player 1
 				} else if ((j==x2)&&(i==y2)) {
-					System.out.print("X"); // opponent 
+					System.out.print("2"); // player 2 
 				} else {
 					System.out.print("."); // these are cells
 				}
@@ -66,16 +73,20 @@ public class GraphBoard implements Board {
 					}
 				}
 			}
-			System.out.println();
-			for (k=0; (k<Game.N_ROWS) && (i!=Game.N_ROWS-1); k++) {
-				if (this.isWall(k, i, k, i+1)) {
+			System.out.println(" |");
+			if (i!=Game.N_ROWS-1) {
+				System.out.print(" |");
+				for (k=0; (k<Game.N_ROWS); k++) {
+					if (this.isWall(k, i, k, i+1)) {
 					System.out.print("- "); // horizontal walls
-				} else {
-					System.out.print("  ");
+					} else {
+						System.out.print("  ");
 				}
+				}
+				System.out.println("|");
 			}
-			System.out.println();
 		}
+		System.out.println("  ------------------");		
 	}
 
 
@@ -83,18 +94,7 @@ public class GraphBoard implements Board {
 	public boolean isPath(int x, int y, int goalY) {
 		
 		//now search for a path on the new graph
-		return b.search(y*Game.N_ROWS+x, goalY);
-		
-		/*
-		if (!b.search(y1*Game.N_ROWS+x1, y2*Game.N_ROWS+x2)) {
-			b.insertEdge(edge1[0], edge1[1]);//put edges back
-			b.insertEdge(edge2[0], edge2[1]);
-			return false;
-		}
-		b.insertEdge(edge1[0], edge1[1]);//put edges back
-		b.insertEdge(edge2[0], edge2[1]);	
-		return true;*/
-		
+		return b.searchGoal(y*Game.N_ROWS+x, goalY);
 	}
 	
 	public void RemoveWall (int Xpos, int Ypos, WallDirections d) {

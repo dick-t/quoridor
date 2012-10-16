@@ -13,9 +13,7 @@ public class Player {
 		x = 4;
 		y = n;
 		wallsLeft = 10;
-		if (isAI) {
-			this.isAI = true;
-		}
+		isAI = false;
 	}
 	
 	public void makeAI() {
