@@ -77,4 +77,62 @@ public class Graph {
 		return false;
 	}
 	
+	public int findOptMove (int n, int goalY) {
+		Queue<Integer> q = new LinkedList<Integer>();
+		int t=0;
+		int c;
+		int count = 0;
+		int visited[] = new int[size];
+		int parent[] = new int[size];
+		for (int i=0; i<size; i++) {
+			parent[i] = -1;
+		}
+		boolean isV;
+		boolean found=false;
+		int lastNode;
+		q.add(n);
+		visited[count] = n;
+		count++;
+		while (q.size() > 0 && !found) { //modified BFS
+			t = q.remove();
+			if ((t>=goalY*Math.sqrt(size))&&(t<(goalY+1)*Math.sqrt(size))) {
+				found = true;
+			}
+			c = 0;
+			while (c < size) {
+				if (array[t][c]) {
+					isV = false;
+					for (int v : visited) {
+						if (v == c) {
+							isV = true;
+						}
+					}
+					if (!isV) {
+						visited[count] = c;
+						count++;
+						q.add(c);
+						if (parent[c]==-1) {
+							parent[c] = t;	
+						}
+					}
+				}
+				c++;
+			}
+		}
+		
+		if (found) {
+			lastNode = parent[t];
+			
+			while (lastNode != n) {
+				t = lastNode;
+				lastNode = parent[t];
+				
+			}
+			return t;
+		} else {
+			System.exit(1);
+		}
+		return 0;
+	}
+	
 }

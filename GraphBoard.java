@@ -92,7 +92,6 @@ public class GraphBoard implements Board {
 
 	@Override
 	public boolean isPath(int x, int y, int goalY) {
-		
 		//now search for a path on the new graph
 		return b.searchGoal(y*Game.N_ROWS+x, goalY);
 	}
@@ -112,5 +111,15 @@ public class GraphBoard implements Board {
 		}
 		b.insertEdge(edge1[0], edge1[1]);//put edges back
 		b.insertEdge(edge2[0], edge2[1]);
+	}
+	
+	public int[] findOptMove (int x, int y, int goalY) {
+		int move[] = new int[2];
+		int n = b.findOptMove(y*Game.N_ROWS+x, goalY);
+		move[0] = (n%Game.N_ROWS);
+		//move[1] = n - (n%Game.N_ROWS);
+		move[1] = (n-move[0])/Game.N_ROWS;
+		System.out.println(move[0]+", "+move[1]);
+		return move;
 	}
 }

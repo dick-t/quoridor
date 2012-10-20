@@ -30,6 +30,12 @@ public class GameState {
 		return curPlayer.isAI();
 	}
 	
+	public void AITurn() {
+		AI.AIMove(board, curPlayer, this);
+		System.out.println("Hello Richard");
+		//curPlayer = curPlayer.opponent;
+	}
+	
 	public boolean isGameOver() {
 		if (player1.hasWon()||player2.hasWon()) {
 			return true;
@@ -40,6 +46,9 @@ public class GameState {
 	}
 	
 	public void undo() {
+		if (curPlayer.opponent.isAI()&&curPlayer.isAI()) {
+			System.out.println("Undo two AI players disallowed");
+		}
 		int[] undo;
 		undo = undoStack.pop();
 		if (undo[0] == 0) { //if undo info is for a move
@@ -65,34 +74,40 @@ public class GameState {
 			redoStack.push(redo);
 			board.RemoveWall(undo[1], undo[2], WallDirections.v);
 		}
-		undo = undoStack.pop();
-		if (undo[0] == 0) { //if undo info is for a move
-			int[] redo = new int[3]; //store redo info
-			redo[0] = 0;
-			redo[1] = curPlayer.getXpos();
-			redo[2] = curPlayer.getYpos();
-			redoStack.push(redo);
-			curPlayer.setXpos(undo[1]);
-			curPlayer.setYpos(undo[2]);
-		} else if (undo[0] == 1) { //horizontal wall
-			int[] redo = new int[3]; //store redo info
-			redo[0] = 1;
-			redo[1] = undo[1];
-			redo[2] = undo[2];
-			redoStack.push(redo);
-			board.RemoveWall(undo[1], undo[2], WallDirections.h);
+		if (!curPlayer.opponent.isAI()) {
+			curPlayer = curPlayer.opponent;
 		} else {
-			int[] redo = new int[3]; //store redo info
-			redo[0] = 2;
-			redo[1] = undo[1];
-			redo[2] = undo[2];
-			redoStack.push(redo);
-			board.RemoveWall(undo[1], undo[2], WallDirections.v);
+			undo = undoStack.pop();
+			if (undo[0] == 0) { //if undo info is for a move
+				int[] redo = new int[3]; //store redo info
+				redo[0] = 0;
+				redo[1] = curPlayer.getXpos();
+				redo[2] = curPlayer.getYpos();
+				redoStack.push(redo);
+				curPlayer.setXpos(undo[1]);
+				curPlayer.setYpos(undo[2]);
+			} else if (undo[0] == 1) { //horizontal wall
+				int[] redo = new int[3]; //store redo info
+				redo[0] = 1;
+				redo[1] = undo[1];
+				redo[2] = undo[2];
+				redoStack.push(redo);
+				board.RemoveWall(undo[1], undo[2], WallDirections.h);
+			} else {
+				int[] redo = new int[3]; //store redo info
+				redo[0] = 2;
+				redo[1] = undo[1];
+				redo[2] = undo[2];
+				redoStack.push(redo);
+				board.RemoveWall(undo[1], undo[2], WallDirections.v);
+			}
 		}
-	}
-	
+	}	
 	
 	public void redo() {
+		if (curPlayer.opponent.isAI()&&curPlayer.isAI()) {
+			System.out.println("Redo two AI players disallowed");
+		}
 		int[] redo;
 		redo = redoStack.pop();
 		if (redo[0] == 0) { //if undo info is for a move
@@ -118,32 +133,35 @@ public class GameState {
 			undoStack.push(undo);
 			board.MakeWall(redo[1], redo[2], WallDirections.v);
 		}
-		redo = redoStack.pop();
-		if (redo[0] == 0) { //if undo info is for a move
-			int[] undo = new int[3]; //store undo info
-			undo[0] = 0;
-			undo[1] = curPlayer.opponent.getXpos();
-			undo[2] = curPlayer.opponent.getYpos();
-			undoStack.push(undo);
-			curPlayer.opponent.setXpos(redo[1]);
-			curPlayer.opponent.setYpos(redo[2]);
-		} else if (redo[0] == 1) { //horizontal wall
-			int[] undo = new int[3]; //store undo info
-			undo[0] = 1;
-			undo[1] = redo[1];
-			undo[2] = redo[2];
-			undoStack.push(undo);
-			board.MakeWall(redo[1], redo[2], WallDirections.h); //put wall back
+		if (!curPlayer.opponent.isAI()) {
+			curPlayer = curPlayer.opponent;
 		} else {
-			int[] undo = new int[3]; //store redo info
-			undo[0] = 2;
-			undo[1] = redo[1];
-			undo[2] = redo[2];
-			undoStack.push(undo);
-			board.MakeWall(redo[1], redo[2], WallDirections.v);
+			redo = redoStack.pop();
+			if (redo[0] == 0) { //if undo info is for a move
+				int[] undo = new int[3]; //store undo info
+				undo[0] = 0;
+				undo[1] = curPlayer.opponent.getXpos();
+				undo[2] = curPlayer.opponent.getYpos();
+				undoStack.push(undo);
+				curPlayer.opponent.setXpos(redo[1]);
+				curPlayer.opponent.setYpos(redo[2]);
+			} else if (redo[0] == 1) { //horizontal wall
+				int[] undo = new int[3]; //store undo info
+				undo[0] = 1;
+				undo[1] = redo[1];
+				undo[2] = redo[2];
+				undoStack.push(undo);
+				board.MakeWall(redo[1], redo[2], WallDirections.h); //put wall back
+			} else {
+				int[] undo = new int[3]; //store redo info
+				undo[0] = 2;
+				undo[1] = redo[1];
+				undo[2] = redo[2];
+				undoStack.push(undo);
+				board.MakeWall(redo[1], redo[2], WallDirections.v);
+			}
 		}
-	}
-	
+	}	
 	
 	public boolean move(int x, int y) {
 		if (Rules.isLegalMove(curPlayer, x, y, board)) {
@@ -186,6 +204,12 @@ public class GameState {
 	}
 	
 	public void print () {
+		if (curPlayer == player1) {
+			System.out.println("It is player 1's turn");
+		}
+		else {
+			System.out.println("It is player 2's turn");
+		}
 		board.printBoard(player1.getXpos(), player1.getYpos(), player2.getXpos(), player2.getYpos());
 		System.out.print("Player 1: (");
 		System.out.print(player1.getXpos()+", "+player1.getYpos());

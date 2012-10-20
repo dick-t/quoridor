@@ -23,10 +23,12 @@ public class GameRunner {
 				if (!gs.isAITurn()) {
 					humanTurn(gs);
 				}  else {
-				    AITurn(gs);
+				    gs.AITurn();
+				    madeMove = true;
 				}
 			}
 		}
+		gs.print();
 		System.out.println("Game Over!");
 	}
 	
@@ -36,11 +38,6 @@ public class GameRunner {
 		System.out.println("To place a wall: x y w[h|v]");
 		System.out.print("Give the coordinates of the top left space involved in your wall, ");
 		System.out.println("followed by wh for a horizonal wall or wv for a vertical wall.");
-	}
-	
-	public static void AITurn (GameState gs) {
-		System.out.println("AI does nothing");
-		gs.switchPlayers();
 	}
 	
 	public static void humanTurn (GameState gs) {
@@ -83,6 +80,7 @@ public class GameRunner {
 					if (tokens[2].charAt(1)=='h') {
 					//	horizontal wall
 						madeMove = gs.placeWall(x, y, WallDirections.h);
+						System.out.println(madeMove);
 						wasInvalid = !madeMove;
 					} else if (tokens[2].charAt(1)=='v') {
 					//	vertical wall

@@ -17,4 +17,6 @@ public interface Board {
 	public void printBoard(int x1, int y1, int x2, int y2);
 	
 	public boolean isPath(int x, int y, int goalY);
+	
+	public int[] findOptMove (int x, int y, int goalY);
 }
