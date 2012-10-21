@@ -1,7 +1,11 @@
-package project;
+package quoridor;
 
 import java.util.*;
 
+/**
+ * @author Iris Uy and Richard Taylor
+ * graph representation of a 2D array
+ */
 public class Graph {
 	private boolean array[][];
 	private int size;

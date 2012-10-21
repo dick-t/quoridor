@@ -1,7 +1,11 @@
-package project;
+package quoridor;
 
-import project.Game.WallDirections;
+import quoridor.Game.WallDirections;
 
+/**
+ * @author Iris Uy and Richard Taylor
+ *
+ */
 public class GraphBoard implements Board {
 
 	//graph-based implementation of a board
@@ -10,17 +14,9 @@ public class GraphBoard implements Board {
 	protected GraphBoard () {
 		b = new Graph(Game.N_ROWS);
 	}
-	
-
-	@Override
-	public boolean isUnique(Board newBoard) { //compare 
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public void MakeWall(int Xpos, int Ypos, WallDirections d) {
-		// TODO Auto-generated method stub
 		int edge1[] = new int[2], edge2[] = new int[2];
 		int NWSquare = Ypos*(Game.N_ROWS) + Xpos;
 		edge1[0] = NWSquare;

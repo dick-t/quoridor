@@ -1,19 +1,27 @@
-package project;
+package quoridor;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import project.Game.WallDirections;
+import quoridor.Game.WallDirections;
 
+/**
+ * @author Iris Uy and Richard Taylor
+ *
+ */
 public class GameRunner {
 	
 	static boolean madeMove;
 	static boolean wasInvalid;
 	static String input = "";
 	
+	/**
+	 *  Basic game runner
+	 */
 	public static void runGame () {
 		GameState gs = new GameState();
+		gs.makeAI();
 		while (!gs.isGameOver()) {
 			madeMove = false;
 			wasInvalid = false;
@@ -28,18 +36,26 @@ public class GameRunner {
 				}
 			}
 		}
-		gs.print();
-		System.out.println("Game Over!");
+		gs.printEndGame();
 	}
 	
+	/**
+	 *  Print help information for user
+	 */
 	public static void printHelp () {
 		System.out.println("To make a move: x y m");
 		System.out.println("Give coordinates of the space you wish to move to, followed by an m.");
 		System.out.println("To place a wall: x y w[h|v]");
 		System.out.print("Give the coordinates of the top left space involved in your wall, ");
 		System.out.println("followed by wh for a horizonal wall or wv for a vertical wall.");
+		System.out.println("To undo: u");
+		System.out.println("To redo: r");
 	}
 	
+	/**
+	 * facilitates input for human's turn
+	 * @param gs current gamestate
+	 */
 	public static void humanTurn (GameState gs) {
 		int x=-1, y=-1;
 		BufferedReader is = new BufferedReader (new InputStreamReader(System.in));

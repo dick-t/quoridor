@@ -1,4 +1,4 @@
-package project;
+package quoridor;
 
 public class Main {
 	

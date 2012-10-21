@@ -1,7 +1,18 @@
-package project;
+package quoridor;
 
+/**
+ * @author Iris Uy and Richard Taylor
+ *
+ */
 public class Rules extends Game {
 
+	/**
+	 * @param p current player
+	 * @param Xpos x coord of cell player wants to move to
+	 * @param Ypos y coord of cell player wants to move to
+	 * @param b current board
+	 * @return returns true if the move is allowed
+	 */
 	public static Boolean isLegalMove (Player p, int Xpos, int Ypos, Board b) {
 		int curX = p.getXpos();
 		int curY = p.getYpos();
@@ -20,7 +31,11 @@ public class Rules extends Game {
 		if (manD ==2) {
 			// non-wall affected jumps
 			if ((curX+Xpos == 2*oppX) && (curY+Ypos == 2*oppY)) {
-				return true;
+				if (b.isWall(oppX, oppY, Xpos, Ypos)||b.isWall(curX, curY, oppX, oppY)) {
+					return false;
+				} else {
+					return true;
+				}
 			}
 			// 	wall affected jumps
 			if ((curX==oppX) && (oppY==Ypos)) {
@@ -66,6 +81,14 @@ public class Rules extends Game {
 		return true;
 	}
 	
+	/**
+	 * @param Xpos x coord of NW corner of the wall
+	 * @param Ypos y coord of NW corner of the wall
+	 * @param d direction of the wall
+	 * @param b current board
+	 * @param p player wishing to place wall
+	 * @return returns true if the wall is allowed
+	 */
 	public static Boolean isLegalWall (int Xpos, int Ypos, WallDirections d, Board b, Player p) {
 		// check wall is on board
 		if (p.nWallsLeft()<=0) {
@@ -101,6 +124,11 @@ public class Rules extends Game {
 		return true;
 	}
 	
+	/**
+	 * @param Xpos x coord of a cell
+	 * @param Ypos y coord of a cell
+	 * @return returns true if the cell is on the board
+	 */
 	private static boolean isOnBoard (int Xpos, int Ypos) {
 		if ((Xpos<0)||(Xpos>8)) {
 			return false;
@@ -111,6 +139,14 @@ public class Rules extends Game {
 		return true;
 	}
 	
+	/**
+	 * @param Xpos x coord of NW corner of the wall
+	 * @param Ypos y coord of NW corner of the wall
+	 * @param d direction of the wall
+	 * @param b current board
+	 * @param p player wishing to place wall
+	 * @return returns true if the wall does not block player from the goal
+	 */
 	private static Boolean isPath (int Xpos, int Ypos, WallDirections d, Board b, Player p) {
 		boolean valid;
 		Player q = p.opponent;
